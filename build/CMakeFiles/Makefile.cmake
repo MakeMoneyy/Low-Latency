@@ -7,15 +7,12 @@ set(CMAKE_DEPENDS_GENERATOR "MinGW Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "D:/CMake/share/cmake-4.0/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in"
   "D:/CMake/share/cmake-4.0/Modules/CMakeCInformation.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeCXXInformation.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeCommonLanguageInclude.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/CMakeDependentOption.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeGenericSystem.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeInitializeConfigs.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeLanguageInformation.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/CMakePackageConfigHelpers.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeRCInformation.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeSystemSpecificInformation.cmake"
   "D:/CMake/share/cmake-4.0/Modules/CMakeSystemSpecificInitialize.cmake"
@@ -23,15 +20,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "D:/CMake/share/cmake-4.0/Modules/Compiler/GNU-C.cmake"
   "D:/CMake/share/cmake-4.0/Modules/Compiler/GNU-CXX.cmake"
   "D:/CMake/share/cmake-4.0/Modules/Compiler/GNU.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/ExternalProject/shared_internal_commands.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/FetchContent.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/FetchContent/CMakeLists.cmake.in"
-  "D:/CMake/share/cmake-4.0/Modules/FindGit.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/FindPackageHandleStandardArgs.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/FindPackageMessage.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/FindPython.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/FindPython/Support.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/GNUInstallDirs.cmake"
   "D:/CMake/share/cmake-4.0/Modules/Internal/CMakeCLinkerInformation.cmake"
   "D:/CMake/share/cmake-4.0/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "D:/CMake/share/cmake-4.0/Modules/Internal/CMakeCommonLinkerInformation.cmake"
@@ -50,21 +38,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "D:/CMake/share/cmake-4.0/Modules/Platform/Windows-windres.cmake"
   "D:/CMake/share/cmake-4.0/Modules/Platform/Windows.cmake"
   "D:/CMake/share/cmake-4.0/Modules/Platform/WindowsPaths.cmake"
-  "D:/CMake/share/cmake-4.0/Modules/WriteBasicConfigVersionFile.cmake"
   "D:/Low-Latency/CMakeLists.txt"
   "CMakeFiles/4.0.1/CMakeCCompiler.cmake"
   "CMakeFiles/4.0.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.0.1/CMakeRCCompiler.cmake"
   "CMakeFiles/4.0.1/CMakeSystem.cmake"
-  "_deps/googletest-src/CMakeLists.txt"
-  "_deps/googletest-src/googlemock/CMakeLists.txt"
-  "_deps/googletest-src/googlemock/cmake/gmock.pc.in"
-  "_deps/googletest-src/googlemock/cmake/gmock_main.pc.in"
-  "_deps/googletest-src/googletest/CMakeLists.txt"
-  "_deps/googletest-src/googletest/cmake/Config.cmake.in"
-  "_deps/googletest-src/googletest/cmake/gtest.pc.in"
-  "_deps/googletest-src/googletest/cmake/gtest_main.pc.in"
-  "_deps/googletest-src/googletest/cmake/internal_utils.cmake"
   )
 
 # The corresponding makefile is:
@@ -75,26 +53,10 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "_deps/googletest-subbuild/CMakeLists.txt"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "_deps/googletest-build/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "_deps/googletest-build/googletest/generated/gmock.pc"
-  "_deps/googletest-build/googletest/generated/gmock_main.pc"
-  "_deps/googletest-build/googlemock/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "_deps/googletest-build/googletest/generated/GTestConfigVersion.cmake"
-  "_deps/googletest-build/googletest/generated/GTestConfig.cmake"
-  "_deps/googletest-build/googletest/generated/gtest.pc"
-  "_deps/googletest-build/googletest/generated/gtest_main.pc"
-  "_deps/googletest-build/googletest/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/FinancialAppLib.dir/DependInfo.cmake"
-  "CMakeFiles/FinancialAppTests.dir/DependInfo.cmake"
-  "CMakeFiles/FinancialApp.dir/DependInfo.cmake"
-  "_deps/googletest-build/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
-  "_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake"
-  "_deps/googletest-build/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
-  "_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
+  "CMakeFiles/DataFeedTest.dir/DependInfo.cmake"
   )

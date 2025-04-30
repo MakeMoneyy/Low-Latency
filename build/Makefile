@@ -64,16 +64,6 @@ CMAKE_BINARY_DIR = D:\Low-Latency\build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
-	D:\CMake\bin\ctest.exe $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-.PHONY : test/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
@@ -93,51 +83,6 @@ rebuild_cache:
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	D:\CMake\bin\cmake.exe -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	D:\CMake\bin\cmake.exe -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	D:\CMake\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	D:\CMake\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	D:\CMake\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	D:\CMake\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -171,287 +116,65 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named FinancialAppLib
+# Target rules for targets named DataFeedTest
 
 # Build rule for target.
-FinancialAppLib: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 FinancialAppLib
-.PHONY : FinancialAppLib
+DataFeedTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 DataFeedTest
+.PHONY : DataFeedTest
 
 # fast build rule for target.
-FinancialAppLib/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/build
-.PHONY : FinancialAppLib/fast
+DataFeedTest/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/build
+.PHONY : DataFeedTest/fast
 
-#=============================================================================
-# Target rules for targets named FinancialAppTests
-
-# Build rule for target.
-FinancialAppTests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 FinancialAppTests
-.PHONY : FinancialAppTests
-
-# fast build rule for target.
-FinancialAppTests/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/build
-.PHONY : FinancialAppTests/fast
-
-#=============================================================================
-# Target rules for targets named FinancialApp
-
-# Build rule for target.
-FinancialApp: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 FinancialApp
-.PHONY : FinancialApp
-
-# fast build rule for target.
-FinancialApp/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialApp.dir\build.make CMakeFiles/FinancialApp.dir/build
-.PHONY : FinancialApp/fast
-
-#=============================================================================
-# Target rules for targets named gmock
-
-# Build rule for target.
-gmock: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 gmock
-.PHONY : gmock
-
-# fast build rule for target.
-gmock/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\googletest-build\googlemock\CMakeFiles\gmock.dir\build.make _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/build
-.PHONY : gmock/fast
-
-#=============================================================================
-# Target rules for targets named gmock_main
-
-# Build rule for target.
-gmock_main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 gmock_main
-.PHONY : gmock_main
-
-# fast build rule for target.
-gmock_main/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\googletest-build\googlemock\CMakeFiles\gmock_main.dir\build.make _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/build
-.PHONY : gmock_main/fast
-
-#=============================================================================
-# Target rules for targets named gtest
-
-# Build rule for target.
-gtest: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 gtest
-.PHONY : gtest
-
-# fast build rule for target.
-gtest/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\googletest-build\googletest\CMakeFiles\gtest.dir\build.make _deps/googletest-build/googletest/CMakeFiles/gtest.dir/build
-.PHONY : gtest/fast
-
-#=============================================================================
-# Target rules for targets named gtest_main
-
-# Build rule for target.
-gtest_main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 gtest_main
-.PHONY : gtest_main
-
-# fast build rule for target.
-gtest_main/fast:
-	$(MAKE) $(MAKESILENT) -f _deps\googletest-build\googletest\CMakeFiles\gtest_main.dir\build.make _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/build
-.PHONY : gtest_main/fast
-
-src/main.obj: src/main.cpp.obj
-.PHONY : src/main.obj
+DataFeed.obj: DataFeed.cpp.obj
+.PHONY : DataFeed.obj
 
 # target to build an object file
-src/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialApp.dir\build.make CMakeFiles/FinancialApp.dir/src/main.cpp.obj
-.PHONY : src/main.cpp.obj
+DataFeed.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj
+.PHONY : DataFeed.cpp.obj
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+DataFeed.i: DataFeed.cpp.i
+.PHONY : DataFeed.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialApp.dir\build.make CMakeFiles/FinancialApp.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+DataFeed.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/DataFeed.cpp.i
+.PHONY : DataFeed.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+DataFeed.s: DataFeed.cpp.s
+.PHONY : DataFeed.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialApp.dir\build.make CMakeFiles/FinancialApp.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+DataFeed.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/DataFeed.cpp.s
+.PHONY : DataFeed.cpp.s
 
-src/order_book.obj: src/order_book.cpp.obj
-.PHONY : src/order_book.obj
+main.obj: main.cpp.obj
+.PHONY : main.obj
 
 # target to build an object file
-src/order_book.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/order_book.cpp.obj
-.PHONY : src/order_book.cpp.obj
+main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/main.cpp.obj
+.PHONY : main.cpp.obj
 
-src/order_book.i: src/order_book.cpp.i
-.PHONY : src/order_book.i
-
-# target to preprocess a source file
-src/order_book.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/order_book.cpp.i
-.PHONY : src/order_book.cpp.i
-
-src/order_book.s: src/order_book.cpp.s
-.PHONY : src/order_book.s
-
-# target to generate assembly for a file
-src/order_book.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/order_book.cpp.s
-.PHONY : src/order_book.cpp.s
-
-src/risk_management.obj: src/risk_management.cpp.obj
-.PHONY : src/risk_management.obj
-
-# target to build an object file
-src/risk_management.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/risk_management.cpp.obj
-.PHONY : src/risk_management.cpp.obj
-
-src/risk_management.i: src/risk_management.cpp.i
-.PHONY : src/risk_management.i
+main.i: main.cpp.i
+.PHONY : main.i
 
 # target to preprocess a source file
-src/risk_management.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/risk_management.cpp.i
-.PHONY : src/risk_management.cpp.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-src/risk_management.s: src/risk_management.cpp.s
-.PHONY : src/risk_management.s
-
-# target to generate assembly for a file
-src/risk_management.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/risk_management.cpp.s
-.PHONY : src/risk_management.cpp.s
-
-src/trading_engine.obj: src/trading_engine.cpp.obj
-.PHONY : src/trading_engine.obj
-
-# target to build an object file
-src/trading_engine.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/trading_engine.cpp.obj
-.PHONY : src/trading_engine.cpp.obj
-
-src/trading_engine.i: src/trading_engine.cpp.i
-.PHONY : src/trading_engine.i
-
-# target to preprocess a source file
-src/trading_engine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/trading_engine.cpp.i
-.PHONY : src/trading_engine.cpp.i
-
-src/trading_engine.s: src/trading_engine.cpp.s
-.PHONY : src/trading_engine.s
+main.s: main.cpp.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-src/trading_engine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppLib.dir\build.make CMakeFiles/FinancialAppLib.dir/src/trading_engine.cpp.s
-.PHONY : src/trading_engine.cpp.s
-
-tests/market_data_test.obj: tests/market_data_test.cpp.obj
-.PHONY : tests/market_data_test.obj
-
-# target to build an object file
-tests/market_data_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/market_data_test.cpp.obj
-.PHONY : tests/market_data_test.cpp.obj
-
-tests/market_data_test.i: tests/market_data_test.cpp.i
-.PHONY : tests/market_data_test.i
-
-# target to preprocess a source file
-tests/market_data_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/market_data_test.cpp.i
-.PHONY : tests/market_data_test.cpp.i
-
-tests/market_data_test.s: tests/market_data_test.cpp.s
-.PHONY : tests/market_data_test.s
-
-# target to generate assembly for a file
-tests/market_data_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/market_data_test.cpp.s
-.PHONY : tests/market_data_test.cpp.s
-
-tests/order_book_test.obj: tests/order_book_test.cpp.obj
-.PHONY : tests/order_book_test.obj
-
-# target to build an object file
-tests/order_book_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/order_book_test.cpp.obj
-.PHONY : tests/order_book_test.cpp.obj
-
-tests/order_book_test.i: tests/order_book_test.cpp.i
-.PHONY : tests/order_book_test.i
-
-# target to preprocess a source file
-tests/order_book_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/order_book_test.cpp.i
-.PHONY : tests/order_book_test.cpp.i
-
-tests/order_book_test.s: tests/order_book_test.cpp.s
-.PHONY : tests/order_book_test.s
-
-# target to generate assembly for a file
-tests/order_book_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/order_book_test.cpp.s
-.PHONY : tests/order_book_test.cpp.s
-
-tests/risk_management_test.obj: tests/risk_management_test.cpp.obj
-.PHONY : tests/risk_management_test.obj
-
-# target to build an object file
-tests/risk_management_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/risk_management_test.cpp.obj
-.PHONY : tests/risk_management_test.cpp.obj
-
-tests/risk_management_test.i: tests/risk_management_test.cpp.i
-.PHONY : tests/risk_management_test.i
-
-# target to preprocess a source file
-tests/risk_management_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/risk_management_test.cpp.i
-.PHONY : tests/risk_management_test.cpp.i
-
-tests/risk_management_test.s: tests/risk_management_test.cpp.s
-.PHONY : tests/risk_management_test.s
-
-# target to generate assembly for a file
-tests/risk_management_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/risk_management_test.cpp.s
-.PHONY : tests/risk_management_test.cpp.s
-
-tests/trading_engine_test.obj: tests/trading_engine_test.cpp.obj
-.PHONY : tests/trading_engine_test.obj
-
-# target to build an object file
-tests/trading_engine_test.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/trading_engine_test.cpp.obj
-.PHONY : tests/trading_engine_test.cpp.obj
-
-tests/trading_engine_test.i: tests/trading_engine_test.cpp.i
-.PHONY : tests/trading_engine_test.i
-
-# target to preprocess a source file
-tests/trading_engine_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/trading_engine_test.cpp.i
-.PHONY : tests/trading_engine_test.cpp.i
-
-tests/trading_engine_test.s: tests/trading_engine_test.cpp.s
-.PHONY : tests/trading_engine_test.s
-
-# target to generate assembly for a file
-tests/trading_engine_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\FinancialAppTests.dir\build.make CMakeFiles/FinancialAppTests.dir/tests/trading_engine_test.cpp.s
-.PHONY : tests/trading_engine_test.cpp.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -460,43 +183,14 @@ help:
 	@echo ... clean
 	@echo ... depend
 	@echo ... edit_cache
-	@echo ... install
-	@echo ... install/local
-	@echo ... install/strip
-	@echo ... list_install_components
 	@echo ... rebuild_cache
-	@echo ... test
-	@echo ... FinancialApp
-	@echo ... FinancialAppLib
-	@echo ... FinancialAppTests
-	@echo ... gmock
-	@echo ... gmock_main
-	@echo ... gtest
-	@echo ... gtest_main
-	@echo ... src/main.obj
-	@echo ... src/main.i
-	@echo ... src/main.s
-	@echo ... src/order_book.obj
-	@echo ... src/order_book.i
-	@echo ... src/order_book.s
-	@echo ... src/risk_management.obj
-	@echo ... src/risk_management.i
-	@echo ... src/risk_management.s
-	@echo ... src/trading_engine.obj
-	@echo ... src/trading_engine.i
-	@echo ... src/trading_engine.s
-	@echo ... tests/market_data_test.obj
-	@echo ... tests/market_data_test.i
-	@echo ... tests/market_data_test.s
-	@echo ... tests/order_book_test.obj
-	@echo ... tests/order_book_test.i
-	@echo ... tests/order_book_test.s
-	@echo ... tests/risk_management_test.obj
-	@echo ... tests/risk_management_test.i
-	@echo ... tests/risk_management_test.s
-	@echo ... tests/trading_engine_test.obj
-	@echo ... tests/trading_engine_test.i
-	@echo ... tests/trading_engine_test.s
+	@echo ... DataFeedTest
+	@echo ... DataFeed.obj
+	@echo ... DataFeed.i
+	@echo ... DataFeed.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 .PHONY : help
 
 
