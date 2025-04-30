@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj"
   "CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj.d"
+  "CMakeFiles/DataFeedTest.dir/OrderBook.cpp.obj"
+  "CMakeFiles/DataFeedTest.dir/OrderBook.cpp.obj.d"
   "CMakeFiles/DataFeedTest.dir/main.cpp.obj"
   "CMakeFiles/DataFeedTest.dir/main.cpp.obj.d"
   "DataFeedTest.exe"

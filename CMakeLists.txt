@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(DataFeedTest)
+project(LowLatency)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,8 +7,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # 添加可执行文件
 add_executable(DataFeedTest
     main.cpp
+    OrderBook.cpp
     DataFeed.cpp
 )
 
-# 包含头文件目录
-target_include_directories(DataFeedTest PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}) 
+# 添加测试程序
+add_executable(TestEngine
+    test_trading_engine.cpp
+    TradingEngine.cpp
+    OrderBook.cpp
+    DataFeed.cpp
+)
+
+# 添加头文件目录
+target_include_directories(DataFeedTest PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(TestEngine PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}) 

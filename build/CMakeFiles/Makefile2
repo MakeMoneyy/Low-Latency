@@ -63,10 +63,12 @@ CMAKE_BINARY_DIR = D:\Low-Latency\build
 
 # The main recursive "all" target.
 all: CMakeFiles/DataFeedTest.dir/all
+all: CMakeFiles/TestEngine.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/DataFeedTest.dir/codegen
+codegen: CMakeFiles/TestEngine.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,6 +77,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/DataFeedTest.dir/clean
+clean: CMakeFiles/TestEngine.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -84,12 +87,12 @@ clean: CMakeFiles/DataFeedTest.dir/clean
 CMakeFiles/DataFeedTest.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=1,2,3 "Built target DataFeedTest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=1,2,3,4 "Built target DataFeedTest"
 .PHONY : CMakeFiles/DataFeedTest.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DataFeedTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Low-Latency\build\CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Low-Latency\build\CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/DataFeedTest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\Low-Latency\build\CMakeFiles 0
 .PHONY : CMakeFiles/DataFeedTest.dir/rule
@@ -101,13 +104,45 @@ DataFeedTest: CMakeFiles/DataFeedTest.dir/rule
 # codegen rule for target.
 CMakeFiles/DataFeedTest.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=1,2,3 "Finished codegen for target DataFeedTest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target DataFeedTest"
 .PHONY : CMakeFiles/DataFeedTest.dir/codegen
 
 # clean rule for target.
 CMakeFiles/DataFeedTest.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/clean
 .PHONY : CMakeFiles/DataFeedTest.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/TestEngine.dir
+
+# All Build rule for target.
+CMakeFiles/TestEngine.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=5,6,7,8,9 "Built target TestEngine"
+.PHONY : CMakeFiles/TestEngine.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/TestEngine.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Low-Latency\build\CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TestEngine.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Low-Latency\build\CMakeFiles 0
+.PHONY : CMakeFiles/TestEngine.dir/rule
+
+# Convenience name for target.
+TestEngine: CMakeFiles/TestEngine.dir/rule
+.PHONY : TestEngine
+
+# codegen rule for target.
+CMakeFiles/TestEngine.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=5,6,7,8,9 "Finished codegen for target TestEngine"
+.PHONY : CMakeFiles/TestEngine.dir/codegen
+
+# clean rule for target.
+CMakeFiles/TestEngine.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/clean
+.PHONY : CMakeFiles/TestEngine.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

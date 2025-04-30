@@ -128,12 +128,26 @@ DataFeedTest/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/build
 .PHONY : DataFeedTest/fast
 
+#=============================================================================
+# Target rules for targets named TestEngine
+
+# Build rule for target.
+TestEngine: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TestEngine
+.PHONY : TestEngine
+
+# fast build rule for target.
+TestEngine/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/build
+.PHONY : TestEngine/fast
+
 DataFeed.obj: DataFeed.cpp.obj
 .PHONY : DataFeed.obj
 
 # target to build an object file
 DataFeed.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/DataFeed.cpp.obj
 .PHONY : DataFeed.cpp.obj
 
 DataFeed.i: DataFeed.cpp.i
@@ -142,6 +156,7 @@ DataFeed.i: DataFeed.cpp.i
 # target to preprocess a source file
 DataFeed.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/DataFeed.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/DataFeed.cpp.i
 .PHONY : DataFeed.cpp.i
 
 DataFeed.s: DataFeed.cpp.s
@@ -150,7 +165,59 @@ DataFeed.s: DataFeed.cpp.s
 # target to generate assembly for a file
 DataFeed.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/DataFeed.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/DataFeed.cpp.s
 .PHONY : DataFeed.cpp.s
+
+OrderBook.obj: OrderBook.cpp.obj
+.PHONY : OrderBook.obj
+
+# target to build an object file
+OrderBook.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/OrderBook.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/OrderBook.cpp.obj
+.PHONY : OrderBook.cpp.obj
+
+OrderBook.i: OrderBook.cpp.i
+.PHONY : OrderBook.i
+
+# target to preprocess a source file
+OrderBook.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/OrderBook.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/OrderBook.cpp.i
+.PHONY : OrderBook.cpp.i
+
+OrderBook.s: OrderBook.cpp.s
+.PHONY : OrderBook.s
+
+# target to generate assembly for a file
+OrderBook.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/OrderBook.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/OrderBook.cpp.s
+.PHONY : OrderBook.cpp.s
+
+TradingEngine.obj: TradingEngine.cpp.obj
+.PHONY : TradingEngine.obj
+
+# target to build an object file
+TradingEngine.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/TradingEngine.cpp.obj
+.PHONY : TradingEngine.cpp.obj
+
+TradingEngine.i: TradingEngine.cpp.i
+.PHONY : TradingEngine.i
+
+# target to preprocess a source file
+TradingEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/TradingEngine.cpp.i
+.PHONY : TradingEngine.cpp.i
+
+TradingEngine.s: TradingEngine.cpp.s
+.PHONY : TradingEngine.s
+
+# target to generate assembly for a file
+TradingEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/TradingEngine.cpp.s
+.PHONY : TradingEngine.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
@@ -176,6 +243,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test_trading_engine.obj: test_trading_engine.cpp.obj
+.PHONY : test_trading_engine.obj
+
+# target to build an object file
+test_trading_engine.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/test_trading_engine.cpp.obj
+.PHONY : test_trading_engine.cpp.obj
+
+test_trading_engine.i: test_trading_engine.cpp.i
+.PHONY : test_trading_engine.i
+
+# target to preprocess a source file
+test_trading_engine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/test_trading_engine.cpp.i
+.PHONY : test_trading_engine.cpp.i
+
+test_trading_engine.s: test_trading_engine.cpp.s
+.PHONY : test_trading_engine.s
+
+# target to generate assembly for a file
+test_trading_engine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/test_trading_engine.cpp.s
+.PHONY : test_trading_engine.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -185,12 +276,22 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... DataFeedTest
+	@echo ... TestEngine
 	@echo ... DataFeed.obj
 	@echo ... DataFeed.i
 	@echo ... DataFeed.s
+	@echo ... OrderBook.obj
+	@echo ... OrderBook.i
+	@echo ... OrderBook.s
+	@echo ... TradingEngine.obj
+	@echo ... TradingEngine.i
+	@echo ... TradingEngine.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... test_trading_engine.obj
+	@echo ... test_trading_engine.i
+	@echo ... test_trading_engine.s
 .PHONY : help
 
 

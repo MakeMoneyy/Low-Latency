@@ -205,7 +205,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=DataFeedTest
+CMAKE_PROJECT_NAME:STATIC=LowLatency
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=1.0.0
@@ -349,6 +349,15 @@ GIT_EXECUTABLE:FILEPATH=D:/Git/cmd/git.exe
 //Enable installation of googletest. (Projects embedding googletest
 // may want to turn this OFF.)
 INSTALL_GTEST:BOOL=ON
+
+//Value Computed by CMake
+LowLatency_BINARY_DIR:STATIC=D:/Low-Latency/build
+
+//Value Computed by CMake
+LowLatency_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+LowLatency_SOURCE_DIR:STATIC=D:/Low-Latency
 
 //Value Computed by CMake
 gmock_BINARY_DIR:STATIC=D:/Low-Latency/build/_deps/googletest-build/googlemock

@@ -1,5 +1,5 @@
-CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
- D:\Low-Latency\DataFeed.h \
+CMakeFiles/TestEngine.dir/test_trading_engine.cpp.obj: \
+ D:\Low-Latency\test_trading_engine.cpp D:\Low-Latency\TradingEngine.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/string \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/requires_hosted.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -99,26 +99,9 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uses_allocator.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uses_allocator_args.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tuple \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/functional \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/std_function.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/typeinfo \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/unordered_map \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unordered_map.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable_policy.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/aligned_buffer.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/enable_special_members.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/node_handle.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/erase_if.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_uninitialized.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/array \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/compare \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/memory \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_tempbuf.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_uninitialized.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_raw_storage_iter.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/align.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
@@ -126,7 +109,9 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unique_ptr.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/shared_ptr.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/shared_ptr_base.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/typeinfo \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/allocated_ptr.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/aligned_buffer.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/atomicity.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
@@ -144,9 +129,14 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/backward/auto_ptr.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_memory_defs.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/execution_defs.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/thread \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/std_thread.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/this_thread_sleep.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/unordered_map \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unordered_map.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable_policy.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/enable_special_members.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/node_handle.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/erase_if.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/mutex \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/chrono.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ratio \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstdint \
@@ -156,52 +146,36 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/x86_64-w64-mingw32/include/_timeval.h \
  D:/mingw64/x86_64-w64-mingw32/include/pthread_time.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/parse_numbers.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/atomic \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/random \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cmath \
- D:/mingw64/x86_64-w64-mingw32/include/math.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/specfun.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/gamma.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/special_function_util.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/bessel_function.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/beta_function.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/ell_integral.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/exp_integral.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/hypergeometric.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/legendre_function.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/modified_bessel_func.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_hermite.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_laguerre.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/riemann_zeta.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/random.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uniform_int_dist.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/pmmintrin.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/emmintrin.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xmmintrin.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mmintrin.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mwaitintrin.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/random.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/numeric \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_numeric.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_numeric_defs.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/chrono \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/mutex \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/std_mutex.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unique_lock.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/condition_variable \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/thread \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/std_thread.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/this_thread_sleep.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/atomic \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/functional \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/std_function.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/array \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/compare \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/queue \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/deque \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_deque.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/deque.tcc \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_heap.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_queue.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/future \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/system_error \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/stdexcept \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/atomic_futex.h \
- D:\Low-Latency\ConsoleUtils.h \
+ D:\Low-Latency\OrderBook.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/map \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_tree.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_map.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_multimap.h \
+ D:\Low-Latency\Order.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/chrono \
+ D:\Low-Latency\Trade.h D:\Low-Latency\ConsoleUtils.h \
  D:/mingw64/x86_64-w64-mingw32/include/windows.h \
  D:/mingw64/x86_64-w64-mingw32/include/sdkddkver.h \
  D:/mingw64/x86_64-w64-mingw32/include/excpt.h \
@@ -240,6 +214,7 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/lzcntintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/lwpintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/movdirintrin.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mwaitintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mwaitxintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/pconfigintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/popcntintrin.h \
@@ -263,6 +238,10 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/hresetintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/usermsrintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/immintrin.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mmintrin.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xmmintrin.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/emmintrin.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/pmmintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/tmmintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/smmintrin.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/wmmintrin.h \
@@ -454,6 +433,8 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ios_base.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_classes.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_classes.tcc \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/system_error \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/stdexcept \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/streambuf \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/streambuf.tcc \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/basic_ios.h \
@@ -468,7 +449,14 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj: D:\Low-Latency\DataFeed.cpp \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ostream.tcc \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/istream \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/istream.tcc \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_algo.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/algorithmfwd.h \
- D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_algorithm_defs.h
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iomanip \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/locale \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_facets_nonio.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/time_members.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/messages_members.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_facets_nonio.tcc \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_conv.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/quoted_string.h \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
+ D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc

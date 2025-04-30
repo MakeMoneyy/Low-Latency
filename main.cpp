@@ -37,7 +37,7 @@ void printOrder(const std::shared_ptr<Order>& order) {
         case OrderStatus::NEW: std::cout << "新订单"; break;
         case OrderStatus::PARTIALLY_FILLED: std::cout << "部分成交"; break;
         case OrderStatus::FILLED: std::cout << "完全成交"; break;
-        case OrderStatus::CANCELED: std::cout << "已取消"; break;
+        case OrderStatus::CANCELLED: std::cout << "已取消"; break;
         case OrderStatus::REJECTED: std::cout << "已拒绝"; break;
     }
     std::cout << std::endl << std::endl;
@@ -78,7 +78,6 @@ int main() {
     config.maxPrice = 150.0;       // 最大价格 150
     config.updateIntervalMs = 100; // 每 100ms 更新一次
     config.volatility = 0.01;      // 1% 的波动率
-    config.threadPoolSize = 4;     // 使用 4 个工作线程
     
     // 使用自定义配置创建 DataFeed 实例
     DataFeed feed(config);

@@ -5,11 +5,17 @@
 #include <chrono>
 #include <cmath>
 #include <algorithm>
+#include <thread>
 
-DataFeed::DataFeed(const Config& config) : 
-    config_(config),
-    gen_(rd_()),
-    priceDist_(config.minPrice, config.maxPrice) {
+DataFeed::DataFeed(const Config& config) 
+    : config_(config)
+    , running_(false)
+    , lastUpdateTime_(std::chrono::steady_clock::now()) {
+    
+    // 初始化随机数生成器
+    std::random_device rd;
+    rng_ = std::mt19937(rd());
+    priceDist_ = std::normal_distribution<>(0.0, config.volatility);
     setConsoleEncoding();
     std::cout << "DataFeed 初始化完成" << std::endl;
 }
@@ -18,7 +24,7 @@ DataFeed::~DataFeed() {
     stop();
 }
 
-void DataFeed::subscribe(const std::string& symbol, PriceUpdateCallback callback) {
+void DataFeed::subscribe(const std::string& symbol, PriceCallback callback) {
     std::lock_guard<std::mutex> lock(mutex_);
     callbacks_[symbol] = callback;
     lastPrices_[symbol] = (config_.minPrice + config_.maxPrice) / 2.0;
@@ -33,96 +39,60 @@ void DataFeed::unsubscribe(const std::string& symbol) {
 }
 
 void DataFeed::start() {
-    if (running_.exchange(true)) {
-        return;
-    }
-
-    stopRequested_ = false;
+    if (running_) return;
     
-    // 启动工作线程
-    for (size_t i = 0; i < config_.threadPoolSize; ++i) {
-        workerThreads_.emplace_back(&DataFeed::workerThread, this);
-    }
-    
-    // 启动数据生成线程
-    std::thread([this]() {
-        while (running_ && !stopRequested_) {
-            std::unique_lock<std::mutex> lock(mutex_);
-            for (const auto& [symbol, callback] : callbacks_) {
-                double newPrice = generateRandomPrice(symbol);
-                UpdateTask task{symbol, callback, newPrice};
-                
-                {
-                    std::lock_guard<std::mutex> queueLock(queueMutex_);
-                    taskQueue_.push(std::move(task));
-                }
-                queueCondition_.notify_one();
-            }
-            
-            std::this_thread::sleep_for(std::chrono::milliseconds(config_.updateIntervalMs));
-        }
-    }).detach();
-
-    std::cout << "DataFeed 已启动" << std::endl;
+    running_ = true;
+    updateThread_ = std::thread(&DataFeed::updateLoop, this);
 }
 
 void DataFeed::stop() {
-    if (!running_.exchange(false)) {
-        return;
-    }
-
-    stopRequested_ = true;
-    queueCondition_.notify_all();
+    if (!running_) return;
     
-    // 等待所有线程结束
-    for (auto& thread : workerThreads_) {
-        if (thread.joinable()) {
-            thread.join();
-        }
+    running_ = false;
+    if (updateThread_.joinable()) {
+        updateThread_.join();
     }
-    workerThreads_.clear();
-
     std::cout << "DataFeed 已停止" << std::endl;
 }
 
 void DataFeed::updateConfig(const Config& newConfig) {
     std::lock_guard<std::mutex> lock(mutex_);
     config_ = newConfig;
-    priceDist_ = std::uniform_real_distribution<>(config_.minPrice, config_.maxPrice);
+    priceDist_ = std::normal_distribution<>(0.0, config_.volatility);
     std::cout << "配置已更新" << std::endl;
 }
 
-double DataFeed::generateRandomPrice(const std::string& symbol) {
-    double lastPrice = lastPrices_[symbol];
-    double randomChange = (priceDist_(gen_) - (config_.maxPrice + config_.minPrice) / 2.0) * config_.volatility;
-    double newPrice = lastPrice * (1.0 + randomChange);
-    newPrice = std::max(config_.minPrice, std::min(config_.maxPrice, newPrice));
-    lastPrices_[symbol] = newPrice;
-    return newPrice;
-}
-
-void DataFeed::workerThread() {
-    while (running_ && !stopRequested_) {
-        UpdateTask task;
-        {
-            std::unique_lock<std::mutex> lock(queueMutex_);
-            queueCondition_.wait(lock, [this] {
-                return !taskQueue_.empty() || !running_ || stopRequested_;
-            });
+void DataFeed::updateLoop() {
+    while (running_) {
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+            now - lastUpdateTime_).count();
             
-            if (!running_ || stopRequested_) {
-                break;
-            }
-            
-            if (!taskQueue_.empty()) {
-                task = std::move(taskQueue_.front());
-                taskQueue_.pop();
-            }
+        if (elapsed >= config_.updateIntervalMs) {
+            updatePrices();
+            lastUpdateTime_ = now;
         }
         
-        if (task.callback) {
-            task.callback(task.symbol, task.price);
-        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+}
+
+void DataFeed::updatePrices() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    
+    for (const auto& [symbol, callback] : callbacks_) {
+        // 生成新的价格
+        double priceChange = priceDist_(rng_);
+        double newPrice = lastPrices_[symbol] * (1.0 + priceChange);
+        
+        // 确保价格在有效范围内
+        newPrice = std::max(config_.minPrice, std::min(config_.maxPrice, newPrice));
+        
+        // 更新最后价格
+        lastPrices_[symbol] = newPrice;
+        
+        // 调用回调
+        callback(symbol, newPrice);
     }
 }
 

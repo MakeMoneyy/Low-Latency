@@ -11,33 +11,26 @@ OrderBook::~OrderBook() {
     std::cout << "销毁订单簿: " << symbol_ << std::endl;
 }
 
-OrderID OrderBook::addOrder(const Order& order) {
+bool OrderBook::addOrder(const Order& order) {
     std::lock_guard<std::mutex> lock(mutex_);
     
-    // 生成新的订单ID
-    OrderID orderId = generateOrderId();
+    // 创建订单副本并分配ID
     auto newOrder = std::make_shared<Order>(order);
-    newOrder->id = orderId;
-    newOrder->timestamp = std::chrono::system_clock::now().time_since_epoch().count();
-    
-    // 存储订单
-    orders_[orderId] = newOrder;
-    
-    // 根据订单类型处理
-    switch (newOrder->type) {
-        case OrderType::LIMIT:
-            processLimitOrder(*newOrder);
-            break;
-        case OrderType::MARKET:
-            processMarketOrder(*newOrder);
-            break;
-        default:
-            // 其他类型订单暂不支持
-            updateOrderStatus(orderId, OrderStatus::REJECTED);
-            break;
+    if (newOrder->id == 0) {
+        newOrder->id = generateOrderId();
     }
     
-    return orderId;
+    // 存储订单
+    orders_[newOrder->id] = newOrder;
+    
+    // 根据订单类型处理
+    if (newOrder->type == OrderType::LIMIT) {
+        processLimitOrder(*newOrder);
+    } else if (newOrder->type == OrderType::MARKET) {
+        processMarketOrder(*newOrder);
+    }
+    
+    return true;
 }
 
 bool OrderBook::cancelOrder(OrderID orderId) {
@@ -50,12 +43,11 @@ bool OrderBook::cancelOrder(OrderID orderId) {
     
     auto order = it->second;
     if (order->status == OrderStatus::FILLED || 
-        order->status == OrderStatus::CANCELED) {
+        order->status == OrderStatus::CANCELLED) {
         return false;
     }
     
-    // 更新订单状态
-    updateOrderStatus(orderId, OrderStatus::CANCELED);
+    order->status = OrderStatus::CANCELLED;
     return true;
 }
 
@@ -69,39 +61,30 @@ bool OrderBook::modifyOrder(OrderID orderId, double newPrice, double newQuantity
     
     auto order = it->second;
     if (order->status == OrderStatus::FILLED || 
-        order->status == OrderStatus::CANCELED) {
+        order->status == OrderStatus::CANCELLED) {
         return false;
     }
     
     // 取消原订单
-    cancelOrder(orderId);
+    order->status = OrderStatus::CANCELLED;
     
     // 创建新订单
     Order newOrder = *order;
     newOrder.price = newPrice;
     newOrder.quantity = newQuantity;
-    newOrder.filledQuantity = 0;
     newOrder.status = OrderStatus::NEW;
     
-    // 添加新订单
-    addOrder(newOrder);
-    return true;
+    return addOrder(newOrder);
 }
 
 double OrderBook::getBestBid() const {
     std::lock_guard<std::mutex> lock(mutex_);
-    if (bids_.empty()) {
-        return 0.0;
-    }
-    return bids_.top()->price;
+    return bids_.empty() ? 0.0 : bids_.top().first;
 }
 
 double OrderBook::getBestAsk() const {
     std::lock_guard<std::mutex> lock(mutex_);
-    if (asks_.empty()) {
-        return 0.0;
-    }
-    return asks_.top()->price;
+    return asks_.empty() ? 0.0 : asks_.top().first;
 }
 
 size_t OrderBook::getBidDepth() const {
@@ -124,40 +107,13 @@ void OrderBook::getOrderBookSnapshot(
     std::map<double, double>& bids,
     std::map<double, double>& asks
 ) const {
+    bids = getBids();
+    asks = getAsks();
+}
+
+void OrderBook::updatePrice(double price) {
     std::lock_guard<std::mutex> lock(mutex_);
-    
-    // 清空输出参数
-    bids.clear();
-    asks.clear();
-    
-    // 复制买单队列
-    auto bidsCopy = bids_;
-    while (!bidsCopy.empty()) {
-        auto order = bidsCopy.top();
-        bids[order->price] += (order->quantity - order->filledQuantity);
-        bidsCopy.pop();
-    }
-    
-    // 复制卖单队列
-    auto asksCopy = asks_;
-    while (!asksCopy.empty()) {
-        auto order = asksCopy.top();
-        asks[order->price] += (order->quantity - order->filledQuantity);
-        asksCopy.pop();
-    }
-}
-
-void OrderBook::processLimitOrder(const Order& order) {
-    if (order.side == OrderSide::BUY) {
-        bids_.push(orders_[order.id]);
-    } else {
-        asks_.push(orders_[order.id]);
-    }
-    
-    matchOrders();
-}
-
-void OrderBook::processMarketOrder(const Order& order) {
+    lastPrice_ = price;
     matchOrders();
 }
 
@@ -166,46 +122,84 @@ void OrderBook::matchOrders() {
         auto bestBid = bids_.top();
         auto bestAsk = asks_.top();
         
-        if (bestBid->price < bestAsk->price) {
+        if (bestBid.first >= bestAsk.first) {
+            // 可以成交
+            auto bidOrder = orders_[bestBid.second];
+            auto askOrder = orders_[bestAsk.second];
+            
+            double matchPrice = bestAsk.first;
+            double matchQuantity = std::min(bidOrder->quantity - bidOrder->filledQuantity,
+                                          askOrder->quantity - askOrder->filledQuantity);
+            
+            // 更新订单状态
+            bidOrder->filledQuantity += matchQuantity;
+            askOrder->filledQuantity += matchQuantity;
+            
+            if (bidOrder->filledQuantity >= bidOrder->quantity) {
+                bidOrder->status = OrderStatus::FILLED;
+                bids_.pop();
+            } else {
+                bidOrder->status = OrderStatus::PARTIALLY_FILLED;
+            }
+            
+            if (askOrder->filledQuantity >= askOrder->quantity) {
+                askOrder->status = OrderStatus::FILLED;
+                asks_.pop();
+            } else {
+                askOrder->status = OrderStatus::PARTIALLY_FILLED;
+            }
+        } else {
             break;
-        }
-        
-        // 计算可成交数量
-        double matchQuantity = std::min(
-            bestBid->quantity - bestBid->filledQuantity,
-            bestAsk->quantity - bestAsk->filledQuantity
-        );
-        
-        // 更新订单状态
-        bestBid->filledQuantity += matchQuantity;
-        bestAsk->filledQuantity += matchQuantity;
-        
-        if (bestBid->filledQuantity >= bestBid->quantity) {
-            updateOrderStatus(bestBid->id, OrderStatus::FILLED, bestBid->filledQuantity);
-            bids_.pop();
-        } else {
-            updateOrderStatus(bestBid->id, OrderStatus::PARTIALLY_FILLED, bestBid->filledQuantity);
-        }
-        
-        if (bestAsk->filledQuantity >= bestAsk->quantity) {
-            updateOrderStatus(bestAsk->id, OrderStatus::FILLED, bestAsk->filledQuantity);
-            asks_.pop();
-        } else {
-            updateOrderStatus(bestAsk->id, OrderStatus::PARTIALLY_FILLED, bestAsk->filledQuantity);
         }
     }
 }
 
-void OrderBook::updateOrderStatus(OrderID orderId, OrderStatus status, double filledQuantity) {
-    auto it = orders_.find(orderId);
-    if (it != orders_.end()) {
-        it->second->status = status;
-        if (filledQuantity > 0) {
-            it->second->filledQuantity = filledQuantity;
+void OrderBook::processLimitOrder(const Order& order) {
+    if (order.side == OrderSide::BUY) {
+        bids_.push({order.price, order.id});
+    } else {
+        asks_.push({order.price, order.id});
+    }
+    matchOrders();
+}
+
+void OrderBook::processMarketOrder(const Order& order) {
+    if (order.side == OrderSide::BUY) {
+        if (!asks_.empty()) {
+            bids_.push({std::numeric_limits<double>::max(), order.id});
+        }
+    } else {
+        if (!bids_.empty()) {
+            asks_.push({0.0, order.id});
         }
     }
+    matchOrders();
 }
 
 OrderID OrderBook::generateOrderId() {
     return nextOrderId_++;
+}
+
+std::map<double, double> OrderBook::getBids() const {
+    std::lock_guard<std::mutex> lock(mutex_);
+    std::map<double, double> result;
+    auto tempBids = bids_;
+    while (!tempBids.empty()) {
+        auto [price, _] = tempBids.top();
+        result[price] += 1.0;  // 简化处理，每个价格只显示一个订单
+        tempBids.pop();
+    }
+    return result;
+}
+
+std::map<double, double> OrderBook::getAsks() const {
+    std::lock_guard<std::mutex> lock(mutex_);
+    std::map<double, double> result;
+    auto tempAsks = asks_;
+    while (!tempAsks.empty()) {
+        auto [price, _] = tempAsks.top();
+        result[price] += 1.0;  // 简化处理，每个价格只显示一个订单
+        tempAsks.pop();
+    }
+    return result;
 } 
