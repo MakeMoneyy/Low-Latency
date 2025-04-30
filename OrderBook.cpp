@@ -54,19 +54,6 @@ bool OrderBook::cancelOrder(OrderID orderId) {
         return false;
     }
     
-    // 从价格档位中移除订单数量
-    if (order->side == OrderSide::BUY) {
-        bids_[order->price] -= (order->quantity - order->filledQuantity);
-        if (bids_[order->price] <= 0) {
-            bids_.erase(order->price);
-        }
-    } else {
-        asks_[order->price] -= (order->quantity - order->filledQuantity);
-        if (asks_[order->price] <= 0) {
-            asks_.erase(order->price);
-        }
-    }
-    
     // 更新订单状态
     updateOrderStatus(orderId, OrderStatus::CANCELED);
     return true;
@@ -103,12 +90,18 @@ bool OrderBook::modifyOrder(OrderID orderId, double newPrice, double newQuantity
 
 double OrderBook::getBestBid() const {
     std::lock_guard<std::mutex> lock(mutex_);
-    return bids_.empty() ? 0.0 : bids_.rbegin()->first;
+    if (bids_.empty()) {
+        return 0.0;
+    }
+    return bids_.top()->price;
 }
 
 double OrderBook::getBestAsk() const {
     std::lock_guard<std::mutex> lock(mutex_);
-    return asks_.empty() ? 0.0 : asks_.begin()->first;
+    if (asks_.empty()) {
+        return 0.0;
+    }
+    return asks_.top()->price;
 }
 
 size_t OrderBook::getBidDepth() const {
@@ -132,15 +125,33 @@ void OrderBook::getOrderBookSnapshot(
     std::map<double, double>& asks
 ) const {
     std::lock_guard<std::mutex> lock(mutex_);
-    bids = bids_;
-    asks = asks_;
+    
+    // 清空输出参数
+    bids.clear();
+    asks.clear();
+    
+    // 复制买单队列
+    auto bidsCopy = bids_;
+    while (!bidsCopy.empty()) {
+        auto order = bidsCopy.top();
+        bids[order->price] += (order->quantity - order->filledQuantity);
+        bidsCopy.pop();
+    }
+    
+    // 复制卖单队列
+    auto asksCopy = asks_;
+    while (!asksCopy.empty()) {
+        auto order = asksCopy.top();
+        asks[order->price] += (order->quantity - order->filledQuantity);
+        asksCopy.pop();
+    }
 }
 
 void OrderBook::processLimitOrder(const Order& order) {
     if (order.side == OrderSide::BUY) {
-        bids_[order.price] += order.quantity;
+        bids_.push(orders_[order.id]);
     } else {
-        asks_[order.price] += order.quantity;
+        asks_.push(orders_[order.id]);
     }
     
     matchOrders();
@@ -152,50 +163,35 @@ void OrderBook::processMarketOrder(const Order& order) {
 
 void OrderBook::matchOrders() {
     while (!bids_.empty() && !asks_.empty()) {
-        double bestBid = bids_.rbegin()->first;
-        double bestAsk = asks_.begin()->first;
+        auto bestBid = bids_.top();
+        auto bestAsk = asks_.top();
         
-        if (bestBid < bestAsk) {
+        if (bestBid->price < bestAsk->price) {
             break;
         }
         
-        // 找到可以匹配的订单
-        for (auto& [orderId, order] : orders_) {
-            if (order->status == OrderStatus::FILLED || 
-                order->status == OrderStatus::CANCELED) {
-                continue;
-            }
-            
-            if ((order->side == OrderSide::BUY && order->price >= bestAsk) ||
-                (order->side == OrderSide::SELL && order->price <= bestBid)) {
-                // 执行匹配
-                double matchPrice = order->side == OrderSide::BUY ? bestAsk : bestBid;
-                double matchQuantity = std::min(
-                    order->quantity - order->filledQuantity,
-                    order->side == OrderSide::BUY ? asks_[bestAsk] : bids_[bestBid]
-                );
-                
-                // 更新订单状态
-                order->filledQuantity += matchQuantity;
-                if (order->filledQuantity >= order->quantity) {
-                    updateOrderStatus(orderId, OrderStatus::FILLED, order->filledQuantity);
-                } else {
-                    updateOrderStatus(orderId, OrderStatus::PARTIALLY_FILLED, order->filledQuantity);
-                }
-                
-                // 更新价格档位
-                if (order->side == OrderSide::BUY) {
-                    asks_[bestAsk] -= matchQuantity;
-                    if (asks_[bestAsk] <= 0) {
-                        asks_.erase(bestAsk);
-                    }
-                } else {
-                    bids_[bestBid] -= matchQuantity;
-                    if (bids_[bestBid] <= 0) {
-                        bids_.erase(bestBid);
-                    }
-                }
-            }
+        // 计算可成交数量
+        double matchQuantity = std::min(
+            bestBid->quantity - bestBid->filledQuantity,
+            bestAsk->quantity - bestAsk->filledQuantity
+        );
+        
+        // 更新订单状态
+        bestBid->filledQuantity += matchQuantity;
+        bestAsk->filledQuantity += matchQuantity;
+        
+        if (bestBid->filledQuantity >= bestBid->quantity) {
+            updateOrderStatus(bestBid->id, OrderStatus::FILLED, bestBid->filledQuantity);
+            bids_.pop();
+        } else {
+            updateOrderStatus(bestBid->id, OrderStatus::PARTIALLY_FILLED, bestBid->filledQuantity);
+        }
+        
+        if (bestAsk->filledQuantity >= bestAsk->quantity) {
+            updateOrderStatus(bestAsk->id, OrderStatus::FILLED, bestAsk->filledQuantity);
+            asks_.pop();
+        } else {
+            updateOrderStatus(bestAsk->id, OrderStatus::PARTIALLY_FILLED, bestAsk->filledQuantity);
         }
     }
 }

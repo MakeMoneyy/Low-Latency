@@ -6,6 +6,8 @@
 #include <map>
 #include <mutex>
 #include <atomic>
+#include <queue>
+#include <functional>
 
 // 订单ID类型
 using OrderID = uint64_t;
@@ -83,6 +85,25 @@ public:
     ) const;
 
 private:
+    // 比较器结构体
+    struct BidComparator {
+        bool operator()(const std::shared_ptr<Order>& a, const std::shared_ptr<Order>& b) const {
+            if (a->price != b->price) {
+                return a->price < b->price; // 价格低的优先级低
+            }
+            return a->timestamp > b->timestamp; // 时间早的优先级高
+        }
+    };
+
+    struct AskComparator {
+        bool operator()(const std::shared_ptr<Order>& a, const std::shared_ptr<Order>& b) const {
+            if (a->price != b->price) {
+                return a->price > b->price; // 价格高的优先级低
+            }
+            return a->timestamp > b->timestamp; // 时间早的优先级高
+        }
+    };
+
     // 处理限价单
     void processLimitOrder(const Order& order);
     
@@ -104,9 +125,13 @@ private:
     // 订单存储
     std::unordered_map<OrderID, std::shared_ptr<Order>> orders_;
     
-    // 价格档位存储
-    std::map<double, double> bids_;  // 买盘，价格从高到低
-    std::map<double, double> asks_;  // 卖盘，价格从低到高
+    // 优先队列存储
+    std::priority_queue<std::shared_ptr<Order>, 
+                       std::vector<std::shared_ptr<Order>>, 
+                       BidComparator> bids_;
+    std::priority_queue<std::shared_ptr<Order>, 
+                       std::vector<std::shared_ptr<Order>>, 
+                       AskComparator> asks_;
     
     // 线程安全
     mutable std::mutex mutex_;
