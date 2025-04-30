@@ -60,4 +60,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/DataFeedTest.dir/DependInfo.cmake"
   "CMakeFiles/TestEngine.dir/DependInfo.cmake"
+  "CMakeFiles/TestRiskManagement.dir/DependInfo.cmake"
   )

@@ -141,6 +141,19 @@ TestEngine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/build
 .PHONY : TestEngine/fast
 
+#=============================================================================
+# Target rules for targets named TestRiskManagement
+
+# Build rule for target.
+TestRiskManagement: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TestRiskManagement
+.PHONY : TestRiskManagement
+
+# fast build rule for target.
+TestRiskManagement/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/build
+.PHONY : TestRiskManagement/fast
+
 DataFeed.obj: DataFeed.cpp.obj
 .PHONY : DataFeed.obj
 
@@ -195,6 +208,30 @@ OrderBook.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/OrderBook.cpp.s
 .PHONY : OrderBook.cpp.s
 
+RiskManagement.obj: RiskManagement.cpp.obj
+.PHONY : RiskManagement.obj
+
+# target to build an object file
+RiskManagement.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/RiskManagement.cpp.obj
+.PHONY : RiskManagement.cpp.obj
+
+RiskManagement.i: RiskManagement.cpp.i
+.PHONY : RiskManagement.i
+
+# target to preprocess a source file
+RiskManagement.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/RiskManagement.cpp.i
+.PHONY : RiskManagement.cpp.i
+
+RiskManagement.s: RiskManagement.cpp.s
+.PHONY : RiskManagement.s
+
+# target to generate assembly for a file
+RiskManagement.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/RiskManagement.cpp.s
+.PHONY : RiskManagement.cpp.s
+
 TradingEngine.obj: TradingEngine.cpp.obj
 .PHONY : TradingEngine.obj
 
@@ -243,6 +280,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test_risk_management.obj: test_risk_management.cpp.obj
+.PHONY : test_risk_management.obj
+
+# target to build an object file
+test_risk_management.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/test_risk_management.cpp.obj
+.PHONY : test_risk_management.cpp.obj
+
+test_risk_management.i: test_risk_management.cpp.i
+.PHONY : test_risk_management.i
+
+# target to preprocess a source file
+test_risk_management.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/test_risk_management.cpp.i
+.PHONY : test_risk_management.cpp.i
+
+test_risk_management.s: test_risk_management.cpp.s
+.PHONY : test_risk_management.s
+
+# target to generate assembly for a file
+test_risk_management.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/test_risk_management.cpp.s
+.PHONY : test_risk_management.cpp.s
+
 test_trading_engine.obj: test_trading_engine.cpp.obj
 .PHONY : test_trading_engine.obj
 
@@ -277,18 +338,25 @@ help:
 	@echo ... rebuild_cache
 	@echo ... DataFeedTest
 	@echo ... TestEngine
+	@echo ... TestRiskManagement
 	@echo ... DataFeed.obj
 	@echo ... DataFeed.i
 	@echo ... DataFeed.s
 	@echo ... OrderBook.obj
 	@echo ... OrderBook.i
 	@echo ... OrderBook.s
+	@echo ... RiskManagement.obj
+	@echo ... RiskManagement.i
+	@echo ... RiskManagement.s
 	@echo ... TradingEngine.obj
 	@echo ... TradingEngine.i
 	@echo ... TradingEngine.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... test_risk_management.obj
+	@echo ... test_risk_management.i
+	@echo ... test_risk_management.s
 	@echo ... test_trading_engine.obj
 	@echo ... test_trading_engine.i
 	@echo ... test_trading_engine.s

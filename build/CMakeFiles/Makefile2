@@ -64,11 +64,13 @@ CMAKE_BINARY_DIR = D:\Low-Latency\build
 # The main recursive "all" target.
 all: CMakeFiles/DataFeedTest.dir/all
 all: CMakeFiles/TestEngine.dir/all
+all: CMakeFiles/TestRiskManagement.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/DataFeedTest.dir/codegen
 codegen: CMakeFiles/TestEngine.dir/codegen
+codegen: CMakeFiles/TestRiskManagement.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -78,6 +80,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/DataFeedTest.dir/clean
 clean: CMakeFiles/TestEngine.dir/clean
+clean: CMakeFiles/TestRiskManagement.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -143,6 +146,38 @@ CMakeFiles/TestEngine.dir/codegen:
 CMakeFiles/TestEngine.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/clean
 .PHONY : CMakeFiles/TestEngine.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/TestRiskManagement.dir
+
+# All Build rule for target.
+CMakeFiles/TestRiskManagement.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=10,11,12 "Built target TestRiskManagement"
+.PHONY : CMakeFiles/TestRiskManagement.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/TestRiskManagement.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Low-Latency\build\CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TestRiskManagement.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Low-Latency\build\CMakeFiles 0
+.PHONY : CMakeFiles/TestRiskManagement.dir/rule
+
+# Convenience name for target.
+TestRiskManagement: CMakeFiles/TestRiskManagement.dir/rule
+.PHONY : TestRiskManagement
+
+# codegen rule for target.
+CMakeFiles/TestRiskManagement.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=10,11,12 "Finished codegen for target TestRiskManagement"
+.PHONY : CMakeFiles/TestRiskManagement.dir/codegen
+
+# clean rule for target.
+CMakeFiles/TestRiskManagement.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/clean
+.PHONY : CMakeFiles/TestRiskManagement.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

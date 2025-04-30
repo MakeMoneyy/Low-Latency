@@ -11,7 +11,7 @@ add_executable(DataFeedTest
     DataFeed.cpp
 )
 
-# 添加测试程序
+# 添加交易引擎测试程序
 add_executable(TestEngine
     test_trading_engine.cpp
     TradingEngine.cpp
@@ -19,6 +19,13 @@ add_executable(TestEngine
     DataFeed.cpp
 )
 
+# 添加风险管理测试程序
+add_executable(TestRiskManagement
+    test_risk_management.cpp
+    RiskManagement.cpp
+)
+
 # 添加头文件目录
 target_include_directories(DataFeedTest PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(TestEngine PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}) 
+target_include_directories(TestEngine PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(TestRiskManagement PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}) 

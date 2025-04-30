@@ -1,4 +1,5 @@
 D:/Low-Latency/build/CMakeFiles/DataFeedTest.dir
 D:/Low-Latency/build/CMakeFiles/TestEngine.dir
+D:/Low-Latency/build/CMakeFiles/TestRiskManagement.dir
 D:/Low-Latency/build/CMakeFiles/edit_cache.dir
 D:/Low-Latency/build/CMakeFiles/rebuild_cache.dir
