@@ -94,9 +94,75 @@ void TradingEngine::onPriceUpdate(const std::string& symbol, double price) {
     
     // 获取订单簿
     auto it = orderBooks_.find(symbol);
-    if (it != orderBooks_.end()) {
-        it->second->updatePrice(price);
-        processOrderBookUpdate(symbol);
+    if (it == orderBooks_.end()) {
+        return;  // 如果没有找到对应的订单簿，直接返回
+    }
+
+    // 更新订单簿价格
+    it->second->updatePrice(price);
+    
+    // 获取订单簿快照
+    const OrderBook& book = *(it->second);
+    
+    // 检查是否有可匹配的订单
+    double bestBid = book.getBestBid();
+    double bestAsk = book.getBestAsk();
+    
+    // 如果买卖价差存在，检查是否可以匹配
+    if (bestBid >= bestAsk) {
+        // 获取所有可匹配的订单
+        auto bids = book.getBids();
+        auto asks = book.getAsks();
+        
+        // 遍历买盘和卖盘，寻找可匹配的订单
+        for (auto bidIt = bids.begin(); bidIt != bids.end(); ++bidIt) {
+            for (auto askIt = asks.begin(); askIt != asks.end(); ++askIt) {
+                double bidPrice = bidIt->first;
+                double askPrice = askIt->first;
+                
+                // 如果买价大于等于卖价，可以匹配
+                if (bidPrice >= askPrice) {
+                    double bidQuantity = bidIt->second;
+                    double askQuantity = askIt->second;
+                    double matchQuantity = std::min(bidQuantity, askQuantity);
+                    
+                    // 创建成交记录
+                    Trade trade;
+                    trade.symbol = symbol;
+                    trade.price = askPrice;  // 使用卖价作为成交价
+                    trade.quantity = matchQuantity;
+                    
+                    // 通知成交
+                    notifyTrade(trade);
+                    
+                    // 更新订单簿
+                    if (bidQuantity > askQuantity) {
+                        // 买单部分成交
+                        bidIt->second -= askQuantity;
+                        asks.erase(askIt);
+                    } else if (bidQuantity < askQuantity) {
+                        // 卖单部分成交
+                        askIt->second -= bidQuantity;
+                        bids.erase(bidIt);
+                    } else {
+                        // 完全成交
+                        bids.erase(bidIt);
+                        asks.erase(askIt);
+                    }
+                    
+                    // 通知订单簿更新
+                    notifyOrderBookUpdate(book);
+                    
+                    // 如果订单簿发生变化，继续检查
+                    if (bids.empty() || asks.empty()) {
+                        break;
+                    }
+                } else {
+                    // 如果买价小于卖价，停止检查
+                    break;
+                }
+            }
+        }
     }
 }
 

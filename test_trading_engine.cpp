@@ -157,9 +157,72 @@ void test_order_matching() {
     engine.stop();
 }
 
+// 测试价格更新和订单匹配
+void test_price_update() {
+    std::cout << "\n=== 测试价格更新和订单匹配 ===" << std::endl;
+    
+    TradingEngine engine;
+    engine.initialize();
+    engine.start();
+    
+    // 设置回调
+    engine.setOrderCallback([](const Order& order) {
+        std::cout << "订单更新: ID=" << order.id 
+                  << " 状态=" << static_cast<int>(order.status) << std::endl;
+    });
+    
+    engine.setTradeCallback([](const Trade& trade) {
+        std::cout << "成交: 价格=" << trade.price 
+                  << " 数量=" << trade.quantity << std::endl;
+    });
+    
+    engine.setOrderBookCallback([](const OrderBook& book) {
+        std::cout << "订单簿更新: " << book.getSymbol() << std::endl;
+    });
+    
+    // 提交买单
+    Order buyOrder;
+    buyOrder.id = 1;
+    buyOrder.symbol = "BTC/USDT";
+    buyOrder.type = OrderType::LIMIT;
+    buyOrder.side = OrderSide::BUY;
+    buyOrder.price = 50000.0;
+    buyOrder.quantity = 1.0;
+    buyOrder.status = OrderStatus::NEW;
+    
+    engine.submitOrder(buyOrder);
+    
+    // 提交卖单
+    Order sellOrder;
+    sellOrder.id = 2;
+    sellOrder.symbol = "BTC/USDT";
+    sellOrder.type = OrderType::LIMIT;
+    sellOrder.side = OrderSide::SELL;
+    sellOrder.price = 50100.0;
+    sellOrder.quantity = 1.0;
+    sellOrder.status = OrderStatus::NEW;
+    
+    engine.submitOrder(sellOrder);
+    
+    // 显示初始订单簿状态
+    std::cout << "\n初始订单簿状态:" << std::endl;
+    printOrderBook(engine.getOrderBookSnapshot("BTC/USDT"));
+    
+    // 更新价格，触发订单匹配
+    std::cout << "\n更新价格到 50000.0..." << std::endl;
+    engine.onPriceUpdate("BTC/USDT", 50000.0);
+    
+    // 显示最终订单簿状态
+    std::cout << "\n最终订单簿状态:" << std::endl;
+    printOrderBook(engine.getOrderBookSnapshot("BTC/USDT"));
+    
+    engine.stop();
+}
+
 int main() {
     setConsoleEncoding();
     test_basic_functionality();
     test_order_matching();
+    test_price_update();
     return 0;
 } 
