@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/Low-Latency/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
