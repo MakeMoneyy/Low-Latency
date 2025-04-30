@@ -1,4 +1,4 @@
-CMakeFiles/TestRiskManagement.dir/RiskManagement.cpp.obj: \
+CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj: \
  D:\Low-Latency\RiskManagement.cpp D:\Low-Latency\RiskManagement.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/string \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/requires_hosted.h \

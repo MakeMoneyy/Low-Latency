@@ -1,147 +1,202 @@
 #include "DataFeed.h"
+#include "OrderBook.h"
+#include "TradingEngine.h"
+#include "RiskManagement.h"
 #include "ConsoleUtils.h"
 #include <iostream>
-#include <chrono>
-#include <thread>
-#include <vector>
-#include "OrderBook.h"
 #include <iomanip>
-
-// 价格更新回调函数
-void onPriceUpdate(const std::string& symbol, double price) {
-    static std::mutex coutMutex;
-    std::lock_guard<std::mutex> lock(coutMutex);
-    std::cout << "[" << symbol << "] 收到价格更新: " << std::fixed << std::setprecision(2) << price 
-              << " (线程ID: " << std::this_thread::get_id() << ")" << std::endl;
-}
-
-// 打印订单信息
-void printOrder(const std::shared_ptr<Order>& order) {
-    if (!order) {
-        std::cout << "订单不存在" << std::endl;
-        return;
-    }
-    
-    std::cout << "订单ID: " << order->id << std::endl;
-    std::cout << "交易对: " << order->symbol << std::endl;
-    std::cout << "订单类型: " << 
-        (order->type == OrderType::LIMIT ? "限价单" : 
-         order->type == OrderType::MARKET ? "市价单" : "其他") << std::endl;
-    std::cout << "买卖方向: " << 
-        (order->side == OrderSide::BUY ? "买入" : "卖出") << std::endl;
-    std::cout << "价格: " << std::fixed << std::setprecision(2) << order->price << std::endl;
-    std::cout << "数量: " << order->quantity << std::endl;
-    std::cout << "已成交数量: " << order->filledQuantity << std::endl;
-    std::cout << "订单状态: ";
-    switch (order->status) {
-        case OrderStatus::NEW: std::cout << "新订单"; break;
-        case OrderStatus::PARTIALLY_FILLED: std::cout << "部分成交"; break;
-        case OrderStatus::FILLED: std::cout << "完全成交"; break;
-        case OrderStatus::CANCELLED: std::cout << "已取消"; break;
-        case OrderStatus::REJECTED: std::cout << "已拒绝"; break;
-    }
-    std::cout << std::endl << std::endl;
-}
+#include <thread>
+#include <chrono>
 
 // 打印订单簿快照
 void printOrderBook(const OrderBook& book) {
-    std::map<double, double> bids, asks;
-    book.getOrderBookSnapshot(bids, asks);
+    std::cout << "\n=== 订单簿快照 - " << book.getSymbol() << " ===" << std::endl;
+    std::cout << "----------------------------------------" << std::endl;
     
-    std::cout << "=== 订单簿快照 ===" << std::endl;
-    std::cout << "最佳买价: " << std::fixed << std::setprecision(2) << book.getBestBid() << std::endl;
-    std::cout << "最佳卖价: " << book.getBestAsk() << std::endl;
-    std::cout << "买盘深度: " << book.getBidDepth() << std::endl;
-    std::cout << "卖盘深度: " << book.getAskDepth() << std::endl;
-    
-    std::cout << "\n买盘:" << std::endl;
-    for (auto it = bids.rbegin(); it != bids.rend(); ++it) {
-        std::cout << "价格: " << std::fixed << std::setprecision(2) << it->first 
+    // 打印卖盘
+    std::cout << "卖盘:" << std::endl;
+    auto asks = book.getAsks();
+    for (auto it = asks.rbegin(); it != asks.rend(); ++it) {
+        std::cout << std::fixed << std::setprecision(2)
+                  << "价格: " << it->first 
                   << " 数量: " << it->second << std::endl;
     }
     
-    std::cout << "\n卖盘:" << std::endl;
-    for (const auto& [price, quantity] : asks) {
-        std::cout << "价格: " << std::fixed << std::setprecision(2) << price 
+    std::cout << "----------------------------------------" << std::endl;
+    
+    // 打印买盘
+    std::cout << "买盘:" << std::endl;
+    auto bids = book.getBids();
+    for (const auto& [price, quantity] : bids) {
+        std::cout << std::fixed << std::setprecision(2)
+                  << "价格: " << price 
                   << " 数量: " << quantity << std::endl;
     }
-    std::cout << "=================" << std::endl << std::endl;
+    
+    std::cout << "----------------------------------------" << std::endl;
+}
+
+// 打印订单信息
+void printOrder(const Order& order) {
+    std::cout << "\n=== 订单信息 ===" << std::endl;
+    std::cout << "ID: " << order.id << std::endl;
+    std::cout << "交易对: " << order.symbol << std::endl;
+    std::cout << "类型: " << (order.type == OrderType::LIMIT ? "限价单" : "市价单") << std::endl;
+    std::cout << "方向: " << (order.side == OrderSide::BUY ? "买入" : "卖出") << std::endl;
+    std::cout << "价格: " << std::fixed << std::setprecision(2) << order.price << std::endl;
+    std::cout << "数量: " << order.quantity << std::endl;
+    std::cout << "状态: " << static_cast<int>(order.status) << std::endl;
+}
+
+// 打印成交信息
+void printTrade(const Trade& trade) {
+    std::cout << "\n=== 成交信息 ===" << std::endl;
+    std::cout << "交易对: " << trade.symbol << std::endl;
+    std::cout << "价格: " << std::fixed << std::setprecision(2) << trade.price << std::endl;
+    std::cout << "数量: " << trade.quantity << std::endl;
+}
+
+// 打印账户信息
+void printAccountInfo(const RiskManagement& riskManager) {
+    std::cout << "\n=== 账户信息 ===" << std::endl;
+    std::cout << "总余额: " << std::fixed << std::setprecision(2) 
+              << riskManager.getAccountBalance() << " USDT" << std::endl;
+    std::cout << "可用余额: " << riskManager.getAvailableBalance() << " USDT" << std::endl;
+    std::cout << "未实现盈亏: " << riskManager.getUnrealizedPnL() << " USDT" << std::endl;
+    std::cout << "已实现盈亏: " << riskManager.getRealizedPnL() << " USDT" << std::endl;
+    std::cout << "最大回撤: " << (riskManager.getMaxDrawdown() * 100) << "%" << std::endl;
 }
 
 int main() {
+    // 设置控制台编码
     setConsoleEncoding();
-    std::cout << "开始测试多线程 DataFeed 模块..." << std::endl;
     
-    // 创建自定义配置
+    // 创建数据源配置
     DataFeed::Config config;
-    config.minPrice = 50.0;        // 最小价格 50
-    config.maxPrice = 150.0;       // 最大价格 150
-    config.updateIntervalMs = 100; // 每 100ms 更新一次
-    config.volatility = 0.01;      // 1% 的波动率
+    config.minPrice = 50000.0;      // 最小价格 50000
+    config.maxPrice = 60000.0;      // 最大价格 60000
+    config.updateIntervalMs = 100;  // 每100ms更新一次
+    config.volatility = 0.01;       // 1%的波动率
     
-    // 使用自定义配置创建 DataFeed 实例
+    // 创建数据源实例
     DataFeed feed(config);
     
-    // 创建订单簿
-    OrderBook book("BTC/USD");
+    // 创建交易引擎
+    TradingEngine engine;
     
-    // 订阅价格更新
-    feed.subscribe("BTC/USD", [&book](const std::string& symbol, double price) {
-        // 当收到价格更新时，可以在这里添加自动交易逻辑
-        std::cout << "收到价格更新，当前价格: " << std::fixed << std::setprecision(2) << price << std::endl;
+    // 创建风险管理器（设置初始资金为100000 USDT）
+    RiskLimits limits;
+    limits.maxPositionSize = 10.0;      // 最大持仓10 BTC
+    limits.maxDrawdown = 0.1;           // 最大回撤10%
+    limits.maxLoss = 10000.0;           // 最大亏损10000 USDT
+    limits.maxOrderValue = 50000.0;     // 单笔订单最大价值50000 USDT
+    limits.maxLeverage = 3.0;           // 最大杠杆3倍
+    limits.maxSymbolPosition = 5.0;     // 单个交易对最大持仓5 BTC
+    limits.maxSymbolOrderSize = 1.0;    // 单个交易对最大订单1 BTC
+    limits.minSymbolOrderSize = 0.01;   // 单个交易对最小订单0.01 BTC
+    
+    RiskManagement riskManager(limits, 100000.0);  // 设置10万USDT初始资金
+    
+    // 打印初始账户信息
+    std::cout << "初始账户状态:" << std::endl;
+    printAccountInfo(riskManager);
+    
+    // 设置交易引擎回调
+    engine.setOrderCallback([](const Order& order) {
+        std::cout << "\n收到订单更新通知" << std::endl;
+        printOrder(order);
     });
     
-    // 启动数据流
+    engine.setTradeCallback([](const Trade& trade) {
+        std::cout << "\n收到成交通知" << std::endl;
+        printTrade(trade);
+    });
+    
+    engine.setOrderBookCallback([](const OrderBook& book) {
+        printOrderBook(book);
+    });
+    
+    // 初始化并启动交易引擎
+    engine.initialize();
+    engine.start();
+    
+    // 订阅数据源
+    feed.subscribe("BTC/USDT", [&engine, &riskManager](const std::string& symbol, double price) {
+        // 更新风险管理器的价格
+        riskManager.updatePrice(symbol, price);
+        
+        // 更新交易引擎的价格
+        engine.onPriceUpdate(symbol, price);
+        
+        // 打印最新价格和账户信息
+        std::cout << "\n收到价格更新: " << std::fixed << std::setprecision(2) << price << " USDT" << std::endl;
+        printAccountInfo(riskManager);
+    });
+    
+    // 启动数据源
     feed.start();
     
-    // 添加一些测试订单
+    // 等待数据源启动
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    
+    // 创建并提交买单
     Order buyOrder;
-    buyOrder.symbol = "BTC/USD";
+    buyOrder.symbol = "BTC/USDT";
     buyOrder.type = OrderType::LIMIT;
     buyOrder.side = OrderSide::BUY;
-    buyOrder.price = 100.0;
-    buyOrder.quantity = 1.0;
-    OrderID buyId = book.addOrder(buyOrder);
+    buyOrder.price = 55000.0;
+    buyOrder.quantity = 0.5;
+    buyOrder.status = OrderStatus::NEW;
     
-    std::cout << "添加买单:" << std::endl;
-    printOrder(book.getOrder(buyId));
-    printOrderBook(book);
+    // 检查订单风险
+    auto riskCheck = riskManager.checkOrder(buyOrder);
+    if (riskCheck.passed) {
+        std::cout << "\n提交买单" << std::endl;
+        engine.submitOrder(buyOrder);
+    } else {
+        std::cout << "\n订单被风险控制拒绝: " << riskCheck.message << std::endl;
+    }
     
     // 等待一段时间
     std::this_thread::sleep_for(std::chrono::seconds(2));
     
-    // 添加卖单
+    // 创建并提交卖单
     Order sellOrder;
-    sellOrder.symbol = "BTC/USD";
+    sellOrder.symbol = "BTC/USDT";
     sellOrder.type = OrderType::LIMIT;
     sellOrder.side = OrderSide::SELL;
-    sellOrder.price = 99.0;
-    sellOrder.quantity = 1.0;
-    OrderID sellId = book.addOrder(sellOrder);
+    sellOrder.price = 56000.0;
+    sellOrder.quantity = 0.5;
+    sellOrder.status = OrderStatus::NEW;
     
-    std::cout << "添加卖单:" << std::endl;
-    printOrder(book.getOrder(sellId));
-    printOrderBook(book);
-    
-    // 等待订单匹配
-    std::cout << "等待订单匹配..." << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    
-    // 检查订单状态
-    std::cout << "匹配后买单状态:" << std::endl;
-    printOrder(book.getOrder(buyId));
-    
-    std::cout << "匹配后卖单状态:" << std::endl;
-    printOrder(book.getOrder(sellId));
-    printOrderBook(book);
+    // 检查订单风险
+    riskCheck = riskManager.checkOrder(sellOrder);
+    if (riskCheck.passed) {
+        std::cout << "\n提交卖单" << std::endl;
+        engine.submitOrder(sellOrder);
+    } else {
+        std::cout << "\n订单被风险控制拒绝: " << riskCheck.message << std::endl;
+    }
     
     // 继续运行一段时间
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+    std::this_thread::sleep_for(std::chrono::seconds(5));
     
-    // 停止数据流
+    // 停止数据源和交易引擎
     feed.stop();
+    engine.stop();
     
-    std::cout << "测试完成" << std::endl;
-
+    // 打印最终账户信息
+    std::cout << "\n最终账户状态:" << std::endl;
+    printAccountInfo(riskManager);
+    
+    // 打印最终持仓信息
+    auto position = riskManager.getPosition("BTC/USDT");
+    std::cout << "\n=== 最终持仓信息 ===" << std::endl;
+    std::cout << "数量: " << position.quantity << std::endl;
+    std::cout << "均价: " << position.averagePrice << std::endl;
+    std::cout << "未实现盈亏: " << position.unrealizedPnL << std::endl;
+    std::cout << "已实现盈亏: " << position.realizedPnL << std::endl;
+    std::cout << "最大回撤: " << (position.maxDrawdown * 100) << "%" << std::endl;
+    
     return 0;
 } 

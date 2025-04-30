@@ -5,6 +5,7 @@
 #include <mutex>
 #include "Order.h"
 #include "Trade.h"
+#include "Account.h"
 
 // 持仓信息
 struct Position {
@@ -39,7 +40,7 @@ struct RiskCheckResult {
 
 class RiskManagement {
 public:
-    explicit RiskManagement(const RiskLimits& limits);
+    explicit RiskManagement(const RiskLimits& limits, double initialBalance = 100000.0);
     ~RiskManagement() = default;
 
     // 风险检查
@@ -58,6 +59,8 @@ public:
     double getUnrealizedPnL() const;
     double getRealizedPnL() const;
     double getMaxDrawdown() const;
+    double getAccountBalance() const;
+    double getAvailableBalance() const;
     
     // 风险限制设置
     void setRiskLimits(const RiskLimits& limits);
@@ -70,6 +73,7 @@ private:
     RiskCheckResult checkOrderValueLimit(const Order& order) const;
     RiskCheckResult checkLeverageLimit(const Order& order) const;
     RiskCheckResult checkSymbolLimits(const Order& order) const;
+    RiskCheckResult checkMarginRequirement(const Order& order) const;
     
     // 更新风险指标
     void updateDrawdown(const std::string& symbol);
@@ -80,6 +84,7 @@ private:
     std::unordered_map<std::string, Position> positions_;
     std::unordered_map<std::string, double> lastPrices_;
     mutable std::mutex mutex_;
+    Account account_;
     
     // 账户级别的风险指标
     double totalValue_{0.0};

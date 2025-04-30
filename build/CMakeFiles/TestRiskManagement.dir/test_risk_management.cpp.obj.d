@@ -144,7 +144,8 @@ CMakeFiles/TestRiskManagement.dir/test_risk_management.cpp.obj: \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/this_thread_sleep.h \
  D:\Low-Latency\Order.h \
  D:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/chrono \
- D:\Low-Latency\Trade.h D:\Low-Latency\ConsoleUtils.h \
+ D:\Low-Latency\Trade.h D:\Low-Latency\Account.h \
+ D:\Low-Latency\ConsoleUtils.h \
  D:/mingw64/x86_64-w64-mingw32/include/windows.h \
  D:/mingw64/x86_64-w64-mingw32/include/sdkddkver.h \
  D:/mingw64/x86_64-w64-mingw32/include/excpt.h \

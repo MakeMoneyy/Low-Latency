@@ -116,11 +116,43 @@ CMakeFiles/DataFeedTest.dir/DataFeed.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DataFeedTest.dir/DataFeed.cpp.s"
 	D:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Low-Latency\DataFeed.cpp -o CMakeFiles\DataFeedTest.dir\DataFeed.cpp.s
 
+CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj: CMakeFiles/DataFeedTest.dir/flags.make
+CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj: CMakeFiles/DataFeedTest.dir/includes_CXX.rsp
+CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj: D:/Low-Latency/TradingEngine.cpp
+CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj: CMakeFiles/DataFeedTest.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj"
+	D:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj -MF CMakeFiles\DataFeedTest.dir\TradingEngine.cpp.obj.d -o CMakeFiles\DataFeedTest.dir\TradingEngine.cpp.obj -c D:\Low-Latency\TradingEngine.cpp
+
+CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.i"
+	D:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Low-Latency\TradingEngine.cpp > CMakeFiles\DataFeedTest.dir\TradingEngine.cpp.i
+
+CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.s"
+	D:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Low-Latency\TradingEngine.cpp -o CMakeFiles\DataFeedTest.dir\TradingEngine.cpp.s
+
+CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj: CMakeFiles/DataFeedTest.dir/flags.make
+CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj: CMakeFiles/DataFeedTest.dir/includes_CXX.rsp
+CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj: D:/Low-Latency/RiskManagement.cpp
+CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj: CMakeFiles/DataFeedTest.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj"
+	D:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj -MF CMakeFiles\DataFeedTest.dir\RiskManagement.cpp.obj.d -o CMakeFiles\DataFeedTest.dir\RiskManagement.cpp.obj -c D:\Low-Latency\RiskManagement.cpp
+
+CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.i"
+	D:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Low-Latency\RiskManagement.cpp > CMakeFiles\DataFeedTest.dir\RiskManagement.cpp.i
+
+CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.s"
+	D:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Low-Latency\RiskManagement.cpp -o CMakeFiles\DataFeedTest.dir\RiskManagement.cpp.s
+
 # Object files for target DataFeedTest
 DataFeedTest_OBJECTS = \
 "CMakeFiles/DataFeedTest.dir/main.cpp.obj" \
 "CMakeFiles/DataFeedTest.dir/OrderBook.cpp.obj" \
-"CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj"
+"CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj" \
+"CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj" \
+"CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj"
 
 # External object files for target DataFeedTest
 DataFeedTest_EXTERNAL_OBJECTS =
@@ -128,11 +160,13 @@ DataFeedTest_EXTERNAL_OBJECTS =
 DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/main.cpp.obj
 DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/OrderBook.cpp.obj
 DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj
+DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj
+DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj
 DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/build.make
 DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/linkLibs.rsp
 DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/objects1.rsp
 DataFeedTest.exe: CMakeFiles/DataFeedTest.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable DataFeedTest.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\Low-Latency\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable DataFeedTest.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DataFeedTest.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -2,7 +2,10 @@
 #include <algorithm>
 #include <cmath>
 
-RiskManagement::RiskManagement(const RiskLimits& limits) : limits_(limits) {}
+RiskManagement::RiskManagement(const RiskLimits& limits, double initialBalance)
+    : limits_(limits), account_(initialBalance) {
+    accountHighWaterMark_ = initialBalance;
+}
 
 RiskCheckResult RiskManagement::checkSymbolLimits(const Order& order) const {
     // 检查订单数量是否在最小和最大限制之间
@@ -28,6 +31,12 @@ RiskCheckResult RiskManagement::checkSymbolLimits(const Order& order) const {
 
 RiskCheckResult RiskManagement::checkOrder(const Order& order) {
     std::lock_guard<std::mutex> lock(mutex_);
+    
+    // 检查订单金额是否超过可用余额
+    auto marginCheck = checkMarginRequirement(order);
+    if (!marginCheck.passed) {
+        return marginCheck;
+    }
     
     // 检查单个交易对的风险限制
     auto symbolCheck = checkSymbolLimits(order);
@@ -56,6 +65,12 @@ RiskCheckResult RiskManagement::checkOrder(const Order& order) {
         return leverageCheck;
     }
     
+    // 如果所有检查都通过，冻结订单所需的保证金
+    double orderValue = std::abs(order.price * order.quantity);
+    if (!account_.freezeAmount(orderValue)) {
+        return {false, "冻结保证金失败"};
+    }
+    
     return {true, "订单通过风险检查"};
 }
 
@@ -79,6 +94,11 @@ void RiskManagement::updatePortfolio(const Trade& trade) {
             double pnl = (trade.price - oldAvgPrice) * trade.quantity;
             position.realizedPnL += pnl;
             totalRealizedPnL_ += pnl;
+            
+            // 解冻保证金
+            account_.unfreezeAmount(std::abs(trade.price * trade.quantity));
+            // 更新账户余额
+            account_.deposit(pnl);
         } else {
             position.quantity = newQuantity;
             position.averagePrice = (oldQuantity * oldAvgPrice + trade.quantity * trade.price) / newQuantity;
@@ -228,4 +248,20 @@ void RiskManagement::updateUnrealizedPnL(const std::string& symbol) {
             totalUnrealizedPnL_ += position.unrealizedPnL - oldPnL;
         }
     }
+}
+
+RiskCheckResult RiskManagement::checkMarginRequirement(const Order& order) const {
+    double orderValue = std::abs(order.price * order.quantity);
+    if (orderValue > account_.getAvailableBalance()) {
+        return {false, "可用余额不足"};
+    }
+    return {true, ""};
+}
+
+double RiskManagement::getAccountBalance() const {
+    return account_.getBalance();
+}
+
+double RiskManagement::getAvailableBalance() const {
+    return account_.getAvailableBalance();
 } 

@@ -10,6 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/Low-Latency/DataFeed.cpp" "CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj" "gcc" "CMakeFiles/DataFeedTest.dir/DataFeed.cpp.obj.d"
   "D:/Low-Latency/OrderBook.cpp" "CMakeFiles/DataFeedTest.dir/OrderBook.cpp.obj" "gcc" "CMakeFiles/DataFeedTest.dir/OrderBook.cpp.obj.d"
+  "D:/Low-Latency/RiskManagement.cpp" "CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj" "gcc" "CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj.d"
+  "D:/Low-Latency/TradingEngine.cpp" "CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj" "gcc" "CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj.d"
   "D:/Low-Latency/main.cpp" "CMakeFiles/DataFeedTest.dir/main.cpp.obj" "gcc" "CMakeFiles/DataFeedTest.dir/main.cpp.obj.d"
   )
 

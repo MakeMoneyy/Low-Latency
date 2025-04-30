@@ -213,6 +213,7 @@ RiskManagement.obj: RiskManagement.cpp.obj
 
 # target to build an object file
 RiskManagement.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.obj
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/RiskManagement.cpp.obj
 .PHONY : RiskManagement.cpp.obj
 
@@ -221,6 +222,7 @@ RiskManagement.i: RiskManagement.cpp.i
 
 # target to preprocess a source file
 RiskManagement.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/RiskManagement.cpp.i
 .PHONY : RiskManagement.cpp.i
 
@@ -229,6 +231,7 @@ RiskManagement.s: RiskManagement.cpp.s
 
 # target to generate assembly for a file
 RiskManagement.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/RiskManagement.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestRiskManagement.dir\build.make CMakeFiles/TestRiskManagement.dir/RiskManagement.cpp.s
 .PHONY : RiskManagement.cpp.s
 
@@ -237,6 +240,7 @@ TradingEngine.obj: TradingEngine.cpp.obj
 
 # target to build an object file
 TradingEngine.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.obj
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/TradingEngine.cpp.obj
 .PHONY : TradingEngine.cpp.obj
 
@@ -245,6 +249,7 @@ TradingEngine.i: TradingEngine.cpp.i
 
 # target to preprocess a source file
 TradingEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/TradingEngine.cpp.i
 .PHONY : TradingEngine.cpp.i
 
@@ -253,6 +258,7 @@ TradingEngine.s: TradingEngine.cpp.s
 
 # target to generate assembly for a file
 TradingEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DataFeedTest.dir\build.make CMakeFiles/DataFeedTest.dir/TradingEngine.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TestEngine.dir\build.make CMakeFiles/TestEngine.dir/TradingEngine.cpp.s
 .PHONY : TradingEngine.cpp.s
 

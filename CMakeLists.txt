@@ -9,6 +9,8 @@ add_executable(DataFeedTest
     main.cpp
     OrderBook.cpp
     DataFeed.cpp
+    TradingEngine.cpp
+    RiskManagement.cpp
 )
 
 # 添加交易引擎测试程序
