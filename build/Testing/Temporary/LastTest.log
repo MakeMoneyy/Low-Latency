@@ -1,0 +1,74 @@
+Start testing: Apr 30 13:39 中国标准时间
+----------------------------------------------------------
+1/1 Testing: FinancialAppTests
+1/1 Test: FinancialAppTests
+Command: "D:/Low-Latency/build/FinancialAppTests.exe"
+Directory: D:/Low-Latency/build
+"FinancialAppTests" start time: Apr 30 13:39 中国标准时间
+Output:
+----------------------------------------------------------
+Running main() from D:\Low-Latency\build\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] Running 19 tests from 4 test suites.
+[----------] Global test environment set-up.
+[----------] 5 tests from RiskManagementTest
+[ RUN      ] RiskManagementTest.OrderRiskCheck
+[       OK ] RiskManagementTest.OrderRiskCheck (0 ms)
+[ RUN      ] RiskManagementTest.RiskMetricsUpdate
+[       OK ] RiskManagementTest.RiskMetricsUpdate (0 ms)
+[ RUN      ] RiskManagementTest.RiskLimitExceeded
+[       OK ] RiskManagementTest.RiskLimitExceeded (0 ms)
+[ RUN      ] RiskManagementTest.RiskAlerts
+[       OK ] RiskManagementTest.RiskAlerts (0 ms)
+[ RUN      ] RiskManagementTest.DailyMetricsReset
+[       OK ] RiskManagementTest.DailyMetricsReset (0 ms)
+[----------] 5 tests from RiskManagementTest (0 ms total)
+
+[----------] 5 tests from TradingEngineTest
+[ RUN      ] TradingEngineTest.BasicInitialization
+[       OK ] TradingEngineTest.BasicInitialization (0 ms)
+[ RUN      ] TradingEngineTest.OrderSubmission
+[       OK ] TradingEngineTest.OrderSubmission (0 ms)
+[ RUN      ] TradingEngineTest.MarketDataCallback
+[       OK ] TradingEngineTest.MarketDataCallback (0 ms)
+[ RUN      ] TradingEngineTest.OrderBookAccess
+[       OK ] TradingEngineTest.OrderBookAccess (0 ms)
+[ RUN      ] TradingEngineTest.TradingStats
+[       OK ] TradingEngineTest.TradingStats (0 ms)
+[----------] 5 tests from TradingEngineTest (0 ms total)
+
+[----------] 5 tests from OrderBookTest
+[ RUN      ] OrderBookTest.AddOrder
+[       OK ] OrderBookTest.AddOrder (0 ms)
+[ RUN      ] OrderBookTest.CancelOrder
+[       OK ] OrderBookTest.CancelOrder (0 ms)
+[ RUN      ] OrderBookTest.ModifyOrder
+[       OK ] OrderBookTest.ModifyOrder (0 ms)
+[ RUN      ] OrderBookTest.MarketDepth
+[       OK ] OrderBookTest.MarketDepth (0 ms)
+[ RUN      ] OrderBookTest.SpreadCalculation
+[       OK ] OrderBookTest.SpreadCalculation (0 ms)
+[----------] 5 tests from OrderBookTest (0 ms total)
+
+[----------] 4 tests from MarketDataTest
+[ RUN      ] MarketDataTest.BasicInitialization
+[       OK ] MarketDataTest.BasicInitialization (0 ms)
+[ RUN      ] MarketDataTest.TimestampComparison
+[       OK ] MarketDataTest.TimestampComparison (0 ms)
+[ RUN      ] MarketDataTest.PriceValidation
+[       OK ] MarketDataTest.PriceValidation (0 ms)
+[ RUN      ] MarketDataTest.VolumeValidation
+[       OK ] MarketDataTest.VolumeValidation (0 ms)
+[----------] 4 tests from MarketDataTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 19 tests from 4 test suites ran. (0 ms total)
+[  PASSED  ] 19 tests.
+<end of output>
+Test time =   0.22 sec
+----------------------------------------------------------
+Test Passed.
+"FinancialAppTests" end time: Apr 30 13:39 中国标准时间
+"FinancialAppTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Apr 30 13:39 中国标准时间

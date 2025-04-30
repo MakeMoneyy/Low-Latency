@@ -17,10 +17,48 @@ endif()
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # 添加源文件
-file(GLOB SOURCES "src/*.cpp")
+set(LIB_SOURCES
+    src/order_book.cpp
+    src/trading_engine.cpp
+    src/risk_management.cpp
+)
 
-# 创建可执行文件
-add_executable(${PROJECT_NAME} ${SOURCES})
+# 创建库
+add_library(FinancialAppLib STATIC ${LIB_SOURCES})
 
-# 设置输出目录
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin) 
+# 添加Google Test
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG release-1.12.1
+)
+FetchContent_MakeAvailable(googletest)
+
+# 启用测试
+enable_testing()
+
+# 添加测试可执行文件
+add_executable(
+    FinancialAppTests
+    tests/market_data_test.cpp
+    tests/order_book_test.cpp
+    tests/trading_engine_test.cpp
+    tests/risk_management_test.cpp
+)
+
+# 链接测试可执行文件
+target_link_libraries(
+    FinancialAppTests
+    GTest::gtest_main
+    FinancialAppLib
+)
+
+# 注册测试
+add_test(NAME FinancialAppTests COMMAND FinancialAppTests)
+
+# 创建主程序可执行文件
+add_executable(FinancialApp src/main.cpp)
+target_link_libraries(FinancialApp FinancialAppLib)
+set_target_properties(FinancialApp PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin") 

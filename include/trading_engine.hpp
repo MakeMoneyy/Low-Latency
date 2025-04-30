@@ -8,6 +8,15 @@
 
 namespace financial {
 
+// 交易统计信息结构体
+struct TradingStats {
+    uint64_t totalOrders{0};
+    uint64_t filledOrders{0};
+    uint64_t cancelledOrders{0};
+    double totalVolume{0.0};
+    double totalValue{0.0};
+};
+
 class TradingEngine {
 public:
     using OrderCallback = std::function<void(const Order&, bool success)>;
@@ -43,13 +52,10 @@ public:
     virtual bool isRunning() const = 0;
 
     // 获取交易统计信息
-    virtual struct TradingStats {
-        uint64_t totalOrders;
-        uint64_t filledOrders;
-        uint64_t cancelledOrders;
-        double totalVolume;
-        double totalValue;
-    } getTradingStats() const = 0;
+    virtual const TradingStats& getTradingStats() const = 0;
+
+    // 添加用于测试的方法
+    virtual void onMarketData(const MarketData& data) = 0;
 };
 
 // 工厂函数创建交易引擎实例

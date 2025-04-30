@@ -53,7 +53,7 @@ public:
     virtual std::vector<OrderBookLevel> getAsks(int depth = 10) const = 0;
 
     // 获取市场深度
-    virtual double getMarketDepth(Side side, double price) const = 0;
+    virtual double getMarketDepth(Order::Side side, double price) const = 0;
 };
 
 // 工厂函数创建订单簿实例

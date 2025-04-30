@@ -95,6 +95,7 @@ FinancialApp_EXTERNAL_OBJECTS =
 
 bin/FinancialApp.exe: CMakeFiles/FinancialApp.dir/src/main.cpp.obj
 bin/FinancialApp.exe: CMakeFiles/FinancialApp.dir/build.make
+bin/FinancialApp.exe: libFinancialAppLib.a
 bin/FinancialApp.exe: CMakeFiles/FinancialApp.dir/linkLibs.rsp
 bin/FinancialApp.exe: CMakeFiles/FinancialApp.dir/objects1.rsp
 bin/FinancialApp.exe: CMakeFiles/FinancialApp.dir/link.txt

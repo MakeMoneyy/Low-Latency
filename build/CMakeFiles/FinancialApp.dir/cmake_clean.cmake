@@ -4,7 +4,7 @@ file(REMOVE_RECURSE
   "bin/FinancialApp.exe"
   "bin/FinancialApp.exe.manifest"
   "bin/FinancialApp.pdb"
-  "bin/libFinancialApp.dll.a"
+  "libFinancialApp.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

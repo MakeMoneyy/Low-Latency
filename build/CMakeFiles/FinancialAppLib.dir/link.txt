@@ -1,0 +1,2 @@
+D:\mingw64\bin\ar.exe qc libFinancialAppLib.a CMakeFiles/FinancialAppLib.dir/src/order_book.cpp.obj CMakeFiles/FinancialAppLib.dir/src/trading_engine.cpp.obj CMakeFiles/FinancialAppLib.dir/src/risk_management.cpp.obj
+D:\mingw64\bin\ranlib.exe libFinancialAppLib.a

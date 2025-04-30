@@ -1,3 +1,3 @@
 D:\CMake\bin\cmake.exe -E rm -f CMakeFiles\FinancialApp.dir/objects.a
 D:\mingw64\bin\ar.exe qc CMakeFiles\FinancialApp.dir/objects.a @CMakeFiles\FinancialApp.dir\objects1.rsp
-D:\mingw64\bin\c++.exe -Wl,--whole-archive CMakeFiles\FinancialApp.dir/objects.a -Wl,--no-whole-archive -o bin\FinancialApp.exe -Wl,--out-implib,bin\libFinancialApp.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\FinancialApp.dir\linkLibs.rsp
+D:\mingw64\bin\c++.exe -Wl,--whole-archive CMakeFiles\FinancialApp.dir/objects.a -Wl,--no-whole-archive -o bin\FinancialApp.exe -Wl,--out-implib,libFinancialApp.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\FinancialApp.dir\linkLibs.rsp
